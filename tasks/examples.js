@@ -6,6 +6,7 @@ var connect = require('gulp-connect');
 var del = require('del');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var merge = require('merge-stream');
 var shim = require('browserify-shim');
 var source = require('vinyl-source-stream');
@@ -128,9 +129,10 @@ module.exports = function (gulp, config) {
 
 	gulp.task('build:example:css', function () {
 		if (!config.example.sass) return;
-
+		var autoprefixOpts = config.component.sass.autoprefixer || [];
 		return gulp.src(config.example.src + '/' + config.example.sass)
 			.pipe(sass())
+			.pipe(autoprefixer(autoprefixOpts))
 			.pipe(gulp.dest(config.example.dist))
 			.pipe(connect.reload());
 	});

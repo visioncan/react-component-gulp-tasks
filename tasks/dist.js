@@ -3,6 +3,7 @@ var browserify = require('browserify');
 var del = require('del');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var rename = require('gulp-rename');
 var shim = require('browserify-shim');
 var source = require('vinyl-source-stream');
@@ -43,8 +44,10 @@ module.exports = function (gulp, config) {
 
 	if (config.component.sass && config.component.sass.entry) {
 		gulp.task('build:dist:css', ['clean:dist'], function () {
+			var autoprefixOpts = config.component.sass.autoprefixer || [];
 			return gulp.src(config.component.sass.path + '/' + config.component.sass.entry)
 				.pipe(sass())
+				.pipe(autoprefixer(autoprefixOpts))
 				.pipe(rename(config.component.pkgName + '.css'))
 				.pipe(gulp.dest('dist'))
 				.pipe(rename(config.component.pkgName + '.min.css'))

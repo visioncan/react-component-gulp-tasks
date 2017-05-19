@@ -89,6 +89,7 @@ Required config keys are:
 * `component.dependencies[]` - array of common dependencies that will be excluded from the build, and included in a common bundle for the examples
 * `component.sass.entry` - the entrypoint for the component stylesheet, if you're using sass to provide one
 * `component.sass.path` - the path of the sass/scss files. everything with a .sass/.scss extension in this directory will be watched in for changes in development
+* `component.sass.autoprefixer` - autoprefixer options
 
 **`Example`**
 
@@ -119,7 +120,11 @@ var taskConfig = {
 		],
 		sass: {
 			path: 'scss',
-			entry: 'my-component.scss'
+			entry: 'my-component.scss',
+			autoprefixer: {
+			    browsers: ['last 2 versions'],
+			    cascade: false
+			}
 		}
 	},
 
