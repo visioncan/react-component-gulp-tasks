@@ -5,7 +5,7 @@ var chalk = require('chalk');
 var connect = require('gulp-connect');
 var del = require('del');
 var gutil = require('gulp-util');
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var merge = require('merge-stream');
 var shim = require('browserify-shim');
 var source = require('vinyl-source-stream');
@@ -127,10 +127,10 @@ module.exports = function (gulp, config) {
 	});
 
 	gulp.task('build:example:css', function () {
-		if (!config.example.less) return;
+		if (!config.example.sass) return;
 
-		return gulp.src(config.example.src + '/' + config.example.less)
-			.pipe(less())
+		return gulp.src(config.example.src + '/' + config.example.sass)
+			.pipe(sass())
 			.pipe(gulp.dest(config.example.dist))
 			.pipe(connect.reload());
 	});
@@ -150,17 +150,17 @@ module.exports = function (gulp, config) {
 			return config.example.src + '/' + i;
 		}), ['build:example:files']);
 
-		var watchLESS = [];
-		if (config.example.less && config.example.less.length > 0) {
-			config.example.less.forEach(function(fileName) {
-				watchLESS.push(config.example.src + '/' + fileName);
+		var watchSASS = [];
+		if (config.example.sass && config.example.sass.length > 0) {
+			config.example.sass.forEach(function(fileName) {
+				watchSASS.push(config.example.src + '/' + fileName);
 			});
 		}
 
-		if (config.component.less && config.component.less.path) {
-			watchLESS.push(config.component.less.path + '/**/*.less');
+		if (config.component.sass && config.component.sass.path) {
+			watchSASS.push(config.component.sass.path + '/**/*.{scss,sass}');
 		}
 
-		gulp.watch(watchLESS, ['build:example:css']);
+		gulp.watch(watchSASS, ['build:example:css']);
 	});
 };

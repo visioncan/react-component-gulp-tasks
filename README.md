@@ -6,7 +6,7 @@ This package provides common gulp tasks for building react components with:
 * Browserify for transforming JSX and creating distribution builds
 * Watchify for automatic, efficient rebundling on file changes
 * Connect for serving examples during development, with live-reload integration
-* LESS stylesheets for examples
+* SASS stylesheets for examples
 * Publishing examples to Github Pages
 * Publishing packages to npm and bower
 
@@ -23,7 +23,7 @@ The tasks assume you are following the following conventions for your project:
 * A standalone package will be published to a dist folder (for Bower)
 * Examples consist of
 	* Static file(s) (e.g. html, images, etc)
-	* One or more stylesheets to be generated with LESS
+	* One or more stylesheets to be generated with SASS
 	* One or more scripts to be bundled with Browserify
 * Examples will be packaged into an examples dist folder, and published to github pages
 
@@ -35,8 +35,8 @@ package.json
 gulpfile.js
 src
 	MyComponent.js
-less
-	my-component.less
+scss
+	my-component.scss
 lib
 	// contains transpiled source
 	MyComponent.js
@@ -50,7 +50,7 @@ example
 		// contains built examples
 	src
 		app.js
-		app.less
+		app.scss
 		index.html
 ```
 
@@ -87,8 +87,8 @@ Required config keys are:
 * `component.dist` - the directory to build the distribution to
 * `component.pkgName` - the name of the package that will be exported by the component (**must match the name of your package on npm**)
 * `component.dependencies[]` - array of common dependencies that will be excluded from the build, and included in a common bundle for the examples
-* `component.less.entry` - the entrypoint for the component stylesheet, if you're using less to provide one
-* `component.less.path` - the path of the less files. everything with a .less extension in this directory will be watched in for changes in development
+* `component.sass.entry` - the entrypoint for the component stylesheet, if you're using sass to provide one
+* `component.sass.path` - the path of the sass/scss files. everything with a .sass/.scss extension in this directory will be watched in for changes in development
 
 **`Example`**
 
@@ -96,7 +96,7 @@ Required config keys are:
 * `example.dist` - the directory to build the distribution to
 * `example.files[]` - files will be copied as-is into the `example.dist` folder
 * `example.scripts[]` - scripts will be transpiled with babel and bundled by browserify
-* `example.less[]` - stylesheets will be generated with LESS. Remember to update *css* file references on html.
+* `example.sass[]` - stylesheets will be generated with SASS. Remember to update *css* file references on html.
 * `example.port` - port to serve examples on, defaults to `8000`
 
 ### Example
@@ -117,9 +117,9 @@ var taskConfig = {
 			'react',
 			'react/addons'
 		],
-		less: {
-			path: 'less',
-			entry: 'my-component.less'
+		sass: {
+			path: 'scss',
+			entry: 'my-component.scss'
 		}
 	},
 
@@ -132,8 +132,8 @@ var taskConfig = {
 		scripts: [
 			'app.js'
 		],
-		less: [
-			'app.less'
+		sass: [
+			'app.scss'
 		]
 	}
 

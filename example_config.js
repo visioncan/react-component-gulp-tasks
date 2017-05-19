@@ -13,9 +13,9 @@ module.exports = {
 		dist: 'dist',
 		pkgName: pkg.name,
 		dependencies: dependencies,
-		less: {
-			entry: 'my-component.less',
-			path: 'less'
+		sass: {
+			entry: 'my-component.scss',
+			path: 'scss'
 		}
 	},
 
@@ -29,8 +29,8 @@ module.exports = {
 		scripts: [
 			'app.js'
 		],
-		less: [
-			'app.less'
+		scss: [
+			'app.scss'
 		]
 	}
 };

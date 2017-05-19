@@ -42,7 +42,7 @@ function initTasks (gulp, config) {
 			dist: 'example/dist',
 			files: ['index.html'],
 			scripts: ['example.js'],
-			less: ['example.less']
+			sass: ['example.scss']
 		});
 	}
 
